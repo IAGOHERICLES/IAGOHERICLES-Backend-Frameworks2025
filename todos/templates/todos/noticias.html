@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block page_title %}Notícias{% endblock %}
+
+{% block content %}
+    <h1>📰 Notícias do Mundo Pet</h1>
+    
+    <div class="list-group mt-4">
+        <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+            <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">Nova Campanha de Vacinação</h5>
+            <small>Hoje</small>
+            </div>
+            <p class="mb-1">Traga seu pet para vacinar contra a raiva neste sábado.</p>
+        </a>
+        <a href="#" class="list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">Novo Shampoo disponível no Banho</h5>
+            <small>3 dias atrás</small>
+            </div>
+            <p class="mb-1">Agora temos opção de shampoo hipoalergênico para peles sensíveis.</p>
+        </a>
+    </div>
+{% endblock %}

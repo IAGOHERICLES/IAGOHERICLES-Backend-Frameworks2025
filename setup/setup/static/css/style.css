@@ -1,0 +1,18 @@
+
+/* setup/static/css/style.css */
+
+body {
+    /* Mude a cor de fundo de TUDO na página para um vermelho berrante */
+    background-color: #ff0000 !important; 
+}
+
+.navbar {
+    
+    background-color:darkorange; 
+    justify-content: center;
+}
+
+.navbar-brand,nav-link {
+    color: #343a40 !important;
+    
+}

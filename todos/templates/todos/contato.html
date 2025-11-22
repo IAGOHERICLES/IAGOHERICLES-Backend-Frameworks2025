@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block page_title %}Contato{% endblock %}
+
+{% block content %}
+    <h1>📞 Fale Conosco</h1>
+
+    <div class="row mt-4">
+        <div class="col-md-5">
+            <div class="card bg-light mb-3">
+                <div class="card-header">📍 Nosso Endereço</div>
+                <div class="card-body">
+                    <h5 class="card-title">Pet Shop TWTodos</h5>
+                    <p class="card-text">
+                        Rua dos Cachorros Felizes, 123<br>
+                        Bairro Boa Viagem - Recife, PE<br>
+                        CEP: 51000-000
+                    </p>
+                    <p><strong>Tel:</strong> (81) 99999-9999</p>
+                     <iframe
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d987.6602282633603!2d-34.90242313675794!3d-8.03590754427207!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7ab1855f456aaab%3A0xadf0e7e91f034713!2sAv.%20Conselheiro%20Rosa%20e%20Silva%2C%201847%20-%20sala%201%20-%20Jaqueira%2C%20Recife%20-%20PE%2C%2052050-118!5e0!3m2!1spt-BR!2sbr!4v1763772266958!5m2!1spt-BR!2sbr"
+                      width="500"
+                      height="450"
+                      style="border: 0"
+                      allowfullscreen=""
+                      loading="lazy"
+                      referrerpolicy="no-referrer-when-downgrade"
+                    ></iframe>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-7">
+            <h3>Envie sua reclamação ou sugestão</h3>
+            <form>
+                <div class="mb-3">
+                    <label class="form-label">Seu Nome</label>
+                    <input type="text" class="form-control" placeholder="Ex: Iago">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Mensagem</label>
+                    <textarea class="form-control" rows="4"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Enviar Mensagem</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

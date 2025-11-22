@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+      <h1>Fila de banho dos pets 🐶🚿</h1>
+      
+      {% if todo_list %} 
+      <table class="table table-hover"> <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nome e Raça</th>
+            <th scope="col">Chegou em</th>
+            <th scope="col">Data</th>
+            <th scope="col">Banho Tomado em</th>
+            <th scope ="col">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for todo in todo_list %}
+              <tr>
+                <th scope="row">{{todo.pk}}</th>
+                
+                <td>
+                    {% if todo.finished_at %}
+                        <span class="task-done">{{ todo.title }}</span>
+                    {% else %}
+                        {{ todo.title }}
+                    {% endif %}
+                </td>
+
+                <td>{{todo.created_at|date:"d/m H:i"}}</td>
+                <td>{{todo.deadline|date:"d/m/Y"}}</td>
+                <td>{{todo.finished_at|date:"d/m H:i"|default:"-" }}</td>
+                
+                <td>
+                  {% if not todo.finished_at %}
+                    <form method="POST" action="{% url 'todo-complete' pk=todo.pk %}" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-primary btn-sm">Concluir</button>
+                    </form>
+                  {% else %}
+                    <span class="badge bg-success">Pronto! ✨</span>
+                  {% endif %}
+
+                  <a href="{% url 'todo-update' pk=todo.pk %}" class="btn btn-secondary btn-sm {% if todo.finished_at %}disabled{% endif %}">Editar</a>
+                  
+                  <a href="{% url 'todo-delete' pk=todo.pk %}" class="btn btn-danger btn-sm">Excluir</a>
+                </td>
+              </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+          <div class="alert alert-info" role="alert">
+            Nenhum pet na fila de banho hoje!
+          </div>
+      {% endif %}
+
+    <a href="{% url 'todo-create' %}" class ="btn btn-primary mt-3">Novo Pet na Fila</a>
+
+{% endblock content %}

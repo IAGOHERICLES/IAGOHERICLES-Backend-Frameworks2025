@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mundo Pet - {% block page_title%}{% endblock page_title%}</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
+  </head>
+
+  <body>
+    <header class="meuheader">
+      <nav
+        class="navbar navbar-expand-lg bg-dark border-bottom border-body mb-4"
+        data-bs-theme="dark" 
+      >
+        <div class="container-fluid">
+          <a class="navbar-brand" href="{% url 'todo-list' %}">Mundo Pet</a>
+
+          <div class="d-flex align-items-center">
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'todo-list' %}"
+                    >🛁 Fila de Banho</a
+                  >
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'dicas' %}"
+                    >🐶 Guia & Dicas</a
+                  >
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'noticias' %}"
+                    >📰 Notícias</a
+                  >
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'contato' %}">📞 Contato</a>
+                </li>
+              </ul>
+            </div>
+            {% if user.is_authenticated %}
+            <span class="text-light me-3">Olá, {{ user.username }}!</span>
+
+            <form method="post" action="{% url 'logout' %}" class="d-inline">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-outline-light btn-sm">
+                Sair
+              </button>
+            </form>
+            {% else %}
+            <a
+              href="{% url 'login' %}"
+              class="btn btn-outline-light btn-sm me-2"
+              >Entrar</a
+            >
+            <a href="{% url 'cadastro' %}" class="btn btn-primary btn-sm">Cadastrar</a>
+            {% endif %}
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main class="container">{% block content %} {% endblock content %}</main>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
