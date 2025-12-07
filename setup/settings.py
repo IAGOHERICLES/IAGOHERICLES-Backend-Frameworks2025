@@ -128,9 +128,31 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
+
+
+
+
+
+# C:\twtodos\setup\settings.py
+
+# ... (parte superior do arquivo)
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/5.2/howto/static-files/
+
 STATIC_URL = "static/"
 import os 
-STATICFILES_DIRS = [os.path.join(BASE_DIR, '/static')]
+# CORREÇÃO: Remova a barra inicial ('/')
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')] 
+
+# CONFIGURAÇÕES DE MÍDIA (CORRETAS)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+
+
+# ... (resto do arquivo)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field

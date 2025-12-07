@@ -19,6 +19,32 @@ class Todo(models.Model):
             self.finished_at = timezone.now()
             self.save()
 
+class GuiaDica(models.Model):
+    #Escolha entre raças ou Dicas
+    TIPO_CHOICES = [
+        ('R', 'Raça'),
+        ('D', 'Dica'),
+    ]
+
+    titulo = models.CharField(max_length=200,verbose_name="Título")
+    tipo = models.CharField(
+        max_length=4,
+        choices=TIPO_CHOICES,
+        default='RAÇA', # Note: Seus choices são 'R' e 'D', mas o default é 'RAÇA'.
+        verbose_name="Tipo de Conteúdo"
+    )
+    descricao = models.TextField(verbose_name="Descrição/Conteúdo")
+    criado_em = models.DateTimeField(auto_now_add=True)
+    foto = models.ImageField(upload_to='guias_dicas/', null=True, blank=True, verbose_name="Imagem")
+
+    class Meta:
+        verbose_name = "Conteúdo de Guia/Dica"
+        verbose_name_plural = "Conteúdos de Guia/Dica"
+        ordering = ['-criado_em']
+        
+    def __str__(self):
+        return f"[{self.get_tipo_display()}] {self.titulo}"
+
 class ContatoComentario(models.Model):
     # O usuário que deixou o comentário (pode ser anônimo)
     nome = models.CharField(max_length=100)

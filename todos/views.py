@@ -2,11 +2,12 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import render ,get_object_or_404, redirect
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, View, TemplateView
 from django.urls import reverse_lazy
-from .models import Todo
+from .models import Todo, GuiaDica
 from .forms import CustomUserCreationForm,TodoForm,ComentarioForm
 from django.contrib import messages
 from django.urls import reverse
 from .models import ContatoComentario
+from django.views.generic import ListView
 
 
 class TodoListView(LoginRequiredMixin,ListView):
@@ -38,8 +39,18 @@ class TodoCompleteView(LoginRequiredMixin,View):
         todo.mark_has_complete()
         return redirect("todo-list")
 
-class DicasView(LoginRequiredMixin,TemplateView):
-    template_name = "todos/dicas.html"
+# class DicasView(LoginRequiredMixin,TemplateView):
+#     template_name = "todos/dicas.html"
+
+class DicasListView(LoginRequiredMixin,ListView):
+    # Usa o modelo que criamos
+    model = GuiaDica 
+    # Define o nome da variável que o template vai usar para a lista
+    context_object_name = 'conteudos' 
+    # O template que já existe
+    template_name = 'todos/dicas.html' 
+    # Garante que os mais recentes apareçam primeiro
+    ordering = ['-criado_em']
 
 class NoticiasView(LoginRequiredMixin,TemplateView):
     template_name = "todos/noticias.html"

@@ -17,8 +17,6 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
-
-
 from todos.views import ( 
     TodoListView, 
     TodoCreateView, 
@@ -26,15 +24,19 @@ from todos.views import (
     TodoDeleteView, 
     TodoCompleteView,
 )
+from django.conf import settings # Importa as configurações do projeto para colocar fotos
+from django.conf.urls.static import static # Importa as configurações do projeto para colocar fotos
+
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path('', include('todos.urls')),
+
     path("todos/", include("todos.urls")),
     # Aponta a raiz do projeto para o arquivo todos/urls.py
-    path('', include('todos.urls')),
     path("", TodoListView.as_view(),name="todo-list"),
-    path("create/", TodoCreateView.as_view(),name="todo-create"), 
-    path("update/<int:pk>/", TodoUpdateView.as_view(),name="todo-update"),
-    path("delete/<int:pk>/", TodoDeleteView.as_view(),name="todo-delete"),
-    path("complete/<int:pk>/", TodoCompleteView.as_view(),name="todo-complete"),
+   
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
